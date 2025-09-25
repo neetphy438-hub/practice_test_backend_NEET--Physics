@@ -15,12 +15,14 @@ let activeSessions = {};
 
 // === POST /login ===
 app.post("/login", (req, res) => {
+  console.log("POST /login body:", req.body);
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: "Email is required" });
 
   const normalizedEmail = email.toLowerCase();
 
   if (!allowedEmails.includes(normalizedEmail)) {
+    console.log("Email not allowed:", normalizedEmail);
     return res.status(401).json({ error: "Email not allowed" });
   }
 
@@ -30,6 +32,7 @@ app.post("/login", (req, res) => {
   console.log(`✅ Login: ${normalizedEmail}, token=${token}`);
   res.json({ token });
 });
+
 
 // === POST /validate ===
 app.post("/validate", (req, res) => {
