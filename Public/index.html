@@ -1,519 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class-NEEt-Practice Test</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 15px;
-      background: linear-gradient(135deg, #f9f9f9, #e0f7fa);
-      color: #333;
-      font-size: 13px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NEET Practice Test</title>
+<style>
+/* ==== YOUR ORIGINAL STYLE (unchanged) ==== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 15px;
+  background: linear-gradient(135deg, #e0f7fa, #f9f9f9);
+  color: #333;
+  font-size: 13px;
+}
+#loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  text-align: center;
+  background: linear-gradient(160deg, #e0f2f1 0%, #b2dfdb 100%);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  padding: 30px 20px;
+  max-width: 380px;
+  margin: auto;
+}
+#loginContainer img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+#loginContainer h2 {
+  color: #004D40;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  margin-bottom: 16px;
+}
+#instructionBox {
+  background: rgba(255,255,255,0.8);
+  border-left: 4px solid #00796B;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+#instructionBox ul {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+#loginContainer input {
+  padding: 10px;
+  border: 2px solid #00796B;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  width: 250px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  outline: none;
+  transition: all 0.3s ease;
+}
+#loginContainer input:focus {
+  border-color: #004D40;
+  box-shadow: 0 0 6px rgba(0,121,107,0.4);
+}
+#loginContainer button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #009688, #00796B);
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+#loginContainer button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+  background: linear-gradient(135deg, #26a69a, #004D40);
+}
+#aboutBox {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #004D40;
+  background: rgba(255,255,255,0.85);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+#aboutBox strong { color: #00796B; }
 
-    #loginContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    #loginContainer input {
-      padding: 8px;
-      border: 2px solid #00796B;
-      border-radius: 5px;
-      font-size: 14px;
-      margin-bottom: 10px;
-      width: 250px;
-    }
-
-    #loginContainer button {
-      padding: 8px 12px;
-      border: 2px solid #00796B;
-      border-radius: 5px;
-      background-color: #e0f2f1;
-      color: #004D40;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    #loginContainer button:hover {
-      background-color: #b2dfdb;
-    }
-
-    #appContainer { display: none; }
-
-    .header-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: nowrap;
-      gap: 8px;
-      margin-bottom: 12px;
-      min-width: 0;
-    }
-
-    .header-bar h1 {
-      color: #006064;
-      font-size: 16px;
-      margin: 0;
-      white-space: nowrap;
-      flex: 1;
-      min-width: 0;
-      overflow: hidden; 
-      text-overflow: ellipsis;
-    }
-
-    label {
-      font-weight: bold;
-      color: #00796B;
-      margin-right: 4px;
-      font-size: 12px;
-    }
-
-    select, button {
-      margin: 4px;
-      padding: 5px 8px;
-      border: 2px solid #00796B;
-      border-radius: 5px;
-      background-color: #e0f2f1;
-      color: #004D40;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    select:hover, button:hover { background-color: #b2dfdb; }
-
-    button.back-btn {
-      background-color: #b71c1c;
-      color: white;
-      white-space: nowrap;
-      font-size: 12px;
-      padding: 5px 10px;
-      flex-shrink: 0;
-    }
-    button.back-btn:hover { background-color: #7f0000; }
-
-    iframe {
-      width: 100%;
-      height: 450px;
-      border: 2px solid #004D40;
-      margin-top: 15px;
-      border-radius: 6px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-      transition: height 0.4s ease;
-    }
-
-    @media (max-width: 600px) {
-      body { font-size: 12px; }
-      .header-bar h1 { font-size: 14px; }
-      label { font-size: 11px; }
-      select, button { 
-        width: 100%; 
-        font-size: 11px;
-        padding: 4px 6px; 
-        margin-top: 8px; 
-      }
-      .header-bar { flex-wrap: nowrap; }
-      iframe { height: 350px; }
-    }
-
-    select { white-space: normal !important; height: auto; line-height: 1.2em; }
-    select option { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; }
-    select option:nth-child(even) { background-color: #e8f4ff; }
-    select option:nth-child(odd) { background-color: #ffffff; }
-
-    .hidden { display: none; }
-
-    .inline-topic {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-left: auto;
-      font-size: 12px;
-    }
-  </style>
+#appContainer { display: none; }
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e0f2f1, #ffffff);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  min-width: 0;
+}
+.header-bar h1 {
+  color: #004D40;
+  font-size: 16px;
+  margin: 0;
+  white-space: nowrap;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+label { font-weight: bold; color: #00796B; margin-right: 4px; font-size: 12px; }
+select, button {
+  margin: 4px;
+  padding: 6px 9px;
+  border: 2px solid #00796B;
+  border-radius: 6px;
+  background: linear-gradient(145deg, #e0f2f1, #ffffff);
+  color: #004D40;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+select:hover, button:hover {
+  background: linear-gradient(145deg, #b2dfdb, #e0f2f1);
+  transform: translateY(-1px);
+}
+button.back-btn {
+  background: linear-gradient(135deg, #c62828, #b71c1c);
+  color: white;
+  font-size: 11px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+button.back-btn:hover {
+  background: linear-gradient(135deg, #e53935, #b71c1c);
+  transform: translateY(-1px);
+}
+button.home-btn {
+  background: linear-gradient(135deg, #f57c00, #ef6c00);
+  color: white;
+  font-size: 11px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+button.home-btn:hover {
+  background: linear-gradient(135deg, #fb8c00, #e67e22);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+iframe {
+  width: 100%;
+  height: 450px;
+  border: 2px solid #004D40;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: height 0.4s ease;
+}
+@media (max-width:600px){
+  body{font-size:12px;}
+  .header-bar{
+    flex-wrap:nowrap;
+    gap:4px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .header-bar h1{font-size:13px;flex:1;white-space:nowrap;}
+  .header-bar button{flex-shrink:0;}
+  label{font-size:11px;}
+  select,button{width:100%;font-size:11px;padding:5px 7px;margin-top:6px;}
+  iframe{height:350px;}
+  #loginContainer{width:90%;padding:20px;}
+}
+select{white-space:normal!important;height:auto;line-height:1.2em;}
+select option{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;}
+select option:nth-child(even){background-color:#e8f4ff;}
+select option:nth-child(odd){background-color:#fff;}
+.hidden{display:none;}
+.inline-topic{display:flex;align-items:center;gap:4px;margin-left:auto;font-size:12px;}
+</style>
 </head>
 
 <body>
-  <div id="loginContainer">
-    <h2>Login to Class-12 Practice Test</h2>
-    <input type="email" id="emailInput" placeholder="Enter your email" required />
-    <button onclick="login()">Login</button>
+<div id="loginContainer">
+  <img src="https://i.ibb.co/WNZTWPwv/LOGO-PNG-2025-fab.png" alt="G10 Educational Platform Logo" />
+  
+  <h2>Login to NEET Physics Practice Test</h2>
+  
+  <div id="instructionBox">
+    <strong>Instructions:</strong>
+    <ul>
+      <li>Enter your registered email ID to access practice tests.</li>
+      <li>If your email is not registered, contact: +91 9706380857.</li>
+      <li>Each test is time-bound and may include auto-submission.</li>
+      <li>Use the latest browser for the best experience.</li>
+    </ul>
   </div>
+  <input type="email" id="emailInput" placeholder="Enter your email" required />
+  <button onclick="login()">Login</button>
+  <div id="aboutBox">
+    <strong>About G10 Educational Platform:</strong><br>
+    Located at Jayanagar Charali, Beltola Bazaar Road, Guwahati, G10 is an advanced learning hub that prepares students for <b>Board Exams, IIT-JEE, NEET, and CUET</b>.  
+    <br><br>Join us to learn with clarity, discipline, and confidence.
+  </div>
+</div>
 
-  <div id="appContainer">
-    <div class="header-bar" id="headerBar">
-      <h1>Class 12 Practice Test</h1>
+<div id="appContainer">
+  <div class="header-bar" id="headerBar">
+  
+    <h1>NEET Physics Practice Test</h1>
+	
+    <div style="display:flex; gap:4px;">
       <button id="backBtn" class="back-btn" onclick="resetAll()">Back</button>
+      <button class="home-btn" onclick="window.location.href='https://gten-educational-platform.github.io/Class-12/NEET button.html'">🏠 Home</button>
     </div>
-
-    <div id="controls">
-      <label for="levelSelect">Level / Years:</label>
-      <select id="levelSelect">
-        <option value="">Select Level / Years</option>
-      </select>
-
-      <label for="chapterSelect">Chapter:</label>
-      <select id="chapterSelect" disabled>
-        <option value="">Select Chapter</option>
-      </select>
-
-      <label id="topicLabel" for="itemSelect">Topic / Year:</label>
-      <select id="itemSelect" disabled>
-        <option value="">Select Topic / Year</option>
-      </select>
-    </div>
-
-    <iframe id="viewer" src=""></iframe>
   </div>
 
-  <script>
-    const BACKEND_URL = "https://practice-test-backend-neet-physics-15fq.onrender.com";
+  <div id="controls">
+    <label for="levelSelect">Level / Types:</label>
+    <select id="levelSelect"><option value="">Select Level / Types</option></select>
+    <label for="chapterSelect">Chapter:</label>
+    <select id="chapterSelect" disabled><option value="">Select Chapter</option></select>
+    <label id="topicLabel" for="itemSelect">Topic / Year:</label>
+    <select id="itemSelect" disabled><option value="">Select Topic / Year</option></select>
+  </div>
 
-    async function login() {
-      const email = document.getElementById("emailInput").value.trim().toLowerCase();
-      if (!email || !email.includes("@")) { alert("Your E.Mail ID is not Registered. For registration call +91 9706380857."); return; }
+  <iframe id="viewer" src=""></iframe>
+</div>
 
-      const res = await fetch(`${BACKEND_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
-      });
-      const data = await res.json();
-      if (data.token) {
-        localStorage.setItem("studentEmail", email);
-        localStorage.setItem("sessionToken", data.token);
-        document.getElementById("loginContainer").style.display = "none";
-        document.getElementById("appContainer").style.display = "block";
-      } else { alert("Login failed. Try again."); }
-    }
+<script>
+const BACKEND_URL="https://practice-test-backend-neet-physics-15fq.onrender.com";
 
-    window.onload = async function() {
-      const savedEmail = localStorage.getItem("studentEmail");
-      const token = localStorage.getItem("sessionToken");
-      if (!savedEmail || !token) return;
+/* === LOGIN LOGIC === */
+async function login(){
+ const email=document.getElementById("emailInput").value.trim().toLowerCase();
+ if(!email||!email.includes("@")){
+  alert("Your E.Mail ID is not Registered. For registration call +91 9706380857.");return;
+ }
+ const res=await fetch(`${BACKEND_URL}/login`,{
+  method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})
+ });
+ const data=await res.json();
+ if(data.token){
+  localStorage.setItem("studentEmail",email);
+  localStorage.setItem("sessionToken",data.token);
+  document.getElementById("loginContainer").style.display="none";
+  document.getElementById("appContainer").style.display="block";
+ } else alert("Login failed. Try again.");
+}
 
-      const res = await fetch(`${BACKEND_URL}/validate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: savedEmail, token })
-      });
-      const data = await res.json();
-      if (data.valid) {
-        document.getElementById("loginContainer").style.display = "none";
-        document.getElementById("appContainer").style.display = "block";
-      } else { localStorage.clear(); }
-    };
-
-    setInterval(async () => {
-      const email = localStorage.getItem("studentEmail");
-      const token = localStorage.getItem("sessionToken");
-      if (!email || !token) return;
-      const res = await fetch(`${BACKEND_URL}/validate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, token })
-      });
-      const data = await res.json();
-      if (!data.valid) {
-        alert("⚠️ You have been logged out because this account was opened on another device.");
-        localStorage.clear();
-        location.reload();
-      }
-    }, 5000);
-
-    // Catalog JSON
-   const catalog = {
-  "Topic wise mcq ": {
-  "Chapter 1 - Solution ": {
-              "1. Types of Solutions": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/1. Types of Solutions.html",
-              "2. Concentration expressions mass-mass, mass-volume, volume-volume": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/2. Concentration expressions mass-mass, mass-volume, volume-volume.html",
-			  "3. Parts per million (ppm) and mole fraction": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/3. Parts per million (ppm) and mole fraction.html",
-			  "4. Molarity (M) and Molality (m)": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/4. Molarity (M) and Molality (m).html",
-			  "5. Solubility (solid in liquid, saturated solution, effect of temperature & pressure)": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/5. Solubility (solid in liquid, saturated solution, effect of temperature & pressure).html",
-			  "6. Solubility in liquids, focusing on Henry’s law": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/6. Solubility in liquids, focusing on Henry’s law.html",
-			  "7. Vapour pressure of liquid solutions, including liquid–liquid solutions and Raoult’s law": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/7. Vapour pressure of liquid solutions, including liquid–liquid solutions and Raoult’s law.html",
-			  "8. Vapour pressure of liquid solutions, including Dalton’s law of partial pressures and composition of the vapour phase": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/8. Vapour pressure of liquid solutions, including Dalton’s law of partial pressures and composition of the vapour phase.html",
-			  "9. Raoult’s law as a special case of Henry’s law and vapour pressure of solutions of solids in liquids": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/9. Raoult’s law as a special case of Henry’s law and vapour pressure of solutions of solids in liquids.html",
-			  "10. ideal and non-ideal solutions, including azeotropes": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/10. ideal and non-ideal solutions, including azeotropes.html",
-			  "11. Colligative properties, specifically focusing on relative lowering of vapour pressure and determination of molar mass": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/11. Colligative properties, specifically focusing on relative lowering of vapour pressure and determination of molar mass.html",
-			  "12. Colligative properties – elevation of boiling point": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/12. Colligative properties – elevation of boiling point.html",
-			  "13. Colligative properties – depression of freezing point": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/13. Colligative properties – depression of freezing point.html",
-			  "14. Osmosis, Osmotic Pressure, Reverse Osmosis, and Water Purification": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/14. Osmosis, Osmotic Pressure, Reverse Osmosis, and Water Purification.html",
-			  "15. Abnormal molar masses and Van’t Hoff factor": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/15. Abnormal molar masses and Van’t Hoff factor.html"
-            },
-             "Chapter 2 - Electrochemistry": {
-              "1. Electrochemical cell": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/1. Electrochemical cell.html",
-			 "2. Galvanic Cells": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/2. Galvanic Cells.html",
-			 "3. Measurement of electrode potential,Standard hydrogen electrode (SHE),Cell representation": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/3. Measurement of electrode potential,Standard hydrogen electrode (SHE),Cell representation.html",
-			 "4. Nernst Equation": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/4. Nernst Equation.html",
-			 "5. Equilibrium constant from the Nernst equation": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/5. Equilibrium constant from the Nernst equation.html",
-			 "6. Electrochemical Cell and Gibbs Energy of the Reaction": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/6. Electrochemical Cell and Gibbs Energy of the Reaction.html",
-			 "7. Conductance of Electrolytic Solutions": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/7. Conductance of Electrolytic Solutions.html",
-			 "8. Measurement of Conductivity of Ionic Solutions, Conductivity Cells, and Molar Conductivity": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/8. Measurement of Conductivity of Ionic Solutions, Conductivity Cells, and Molar Conductivity.html",
-			 "9. variation of conductivity and Molar conductivity with concentration": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/9. variation of conductivity and Molar conductivity with concentration.html",
-			 "10. Electrolytic Cell and Electrolysis, including Faraday’s laws": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/10. Electrolytic Cell and Electrolysis, including Faraday’s laws.html",
-			 "11. Products of Electrolysis": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/11. Products of Electrolysis.html",
-			 "12. Batteries, Lead Storage Battery, Fuel Cells, and Corrosion": "https://chemistry-g10ep.github.io/Board-E-Electrochemistry/12. Batteries, Lead Storage Battery, Fuel Cells, and Corrosion.html"
-
-			   },
-			"Chapter 3 - Chemical Kinetics": {
-              "1. Introduction of Chemical Kinetics, average rate of a reaction, Units of rate of a reaction": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/1. Introduction of Chemical Kinetics, average rate of a reaction, Units of rate of a reaction.html",
-			  "2. Factors Influencing the Rate of a Reaction — focusing only on-Dependence of rate on concentration,Rate law, Rate expression, Rate constant": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/2. Factors Influencing the Rate of a Reaction — focusing only on-Dependence of rate on concentration,Rate law, Rate expression, Rate constant.html",
-			  "3. Order of a reaction and Molecularity of a reaction": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/3. Order of a reaction and Molecularity of a reaction.html",
-			  "4. Integrated Rate Equation for Zero-order reactions and Half-life of Zero-order reactions": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/4. Integrated Rate Equation for Zero-order reactions and Half-life of Zero-order reactions.html",
-			  "5. Integrated Rate Equation for First-order reactions and Half-life of First-order reactions": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/5. Integrated Rate Equation for First-order reactions and Half-life of First-order reactions.html",
-			  "6. Temperature Dependence of Rate of a Reaction": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/6. Temperature Dependence of Rate of a Reaction.html",
-			  "7. Collision Theory of Chemical Reactions": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/7. Collision Theory of Chemical Reactions.html",
-			  "": "https://chemistry-g10ep.github.io/Board-E-Chemical-Kinetics/.html"
-				},
-		"Chapter 4 - The d-and f Block Eleents": {
-              "1. The d- and f-Block Elements - Introduction": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/1. The d- and f-Block Elements - Introduction.html",
-			  "2. Position in the Periodic Table and Electronic Configuration": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/2. Position in the Periodic Table and Electronic Configuration.html",
-			   "3. variation in atomic and ionic size, lanthanoid contraction, and actinoid contraction": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/3. variation in atomic and ionic size, lanthanoid contraction, and actinoid contraction.html",
-			    "4. Ionisation Enthalpy and Oxidation States of d-Block Elements": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/4. Ionisation Enthalpy and Oxidation States of d-Block Elements.html",
-				 "5. Trends in 𝑀3+-𝑀2,and 𝑀2+-𝑀M2-+M Standard Electrode Potentials": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/5. Trends in 𝑀3+𝑀2+M3+M2+ and 𝑀2+𝑀M2+M Standard Electrode Potentials.html",
-				  "6. Trends in stability of higher oxidation states, chemical reactivity, and standard electrode (E°) values": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/6. Trends in stability of higher oxidation states, chemical reactivity, and standard electrode (E°) values.html",
-				   "7. Magnetic properties and formation of coloured ions": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/7. Magnetic properties and formation of coloured ions.html",
-				    "8. Formation of Complex Compounds": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/8. Formation of Complex Compounds.html",
-					 "9. Catalytic Properties, Formation of interstitial compounds and alloy formation": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/9. Catalytic Properties, Formation of interstitial compounds and alloy formation.html",
-					  "10. Oxides and Oxoanions of metals": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/10. Oxides and Oxoanions of metals.html",
-					   "11. potassium dichromate (𝐾2𝐶𝑟2𝑂7)": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/11. potassium dichromate (𝐾2𝐶𝑟2𝑂7).html",
-					    "12. Potassium chromate": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/12. Potassium chromate.html",
-						"13. Reactions and Uses of Dichromates, Chromates, and Permanganates": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/13. Reactions and Uses of Dichromates, Chromates, and Permanganates.html",
-						"14. Lanthanoids-electronic configuration, atomic-ionic size, and oxidation state": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/14. Lanthanoids-electronic configuration, atomic-ionic size, and oxidation state.html",
-						 "15. Chemical Properties of Lanthanoids": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/15. Chemical Properties of Lanthanoids.html",
-						 "16. Actinoids -electronic configuration, oxidation states, and chemical properties": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/16. Actinoids -electronic configuration, oxidation states, and chemical properties.html",
-						  "17. Applications of d- and f-block elements": "https://chemistry-g10ep.github.io/Board-E--d-f-block-Elements/17. Applications of d- and f-block elements.html"
-						  	},
-		"Chapter 5 - Coordination Compounds": {
-             "1. Werner’s Theory of Coordination Compounds": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/1. Werner’s Theory of Coordination Compounds.html",
-			 "2. Ionisation Test (AgNO₃ test) and structures of Werner’s complexes": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/2. Ionisation Test (AgNO₃ test) and structures of Werner’s complexes.html",
-			"3. Difference between a double salt and a complex": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/3. Difference between a double salt and a complex.html",
-			"4. Definition of Important Terms in Coordination Compounds-1": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/4. Definition of Important Terms in Coordination Compounds-1.html",
-			"5. Definition of Important Terms in Coordination Compounds-2": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/5. Definition of Important Terms in Coordination Compounds-2.html",
-			"6. Nomenclature of Coordination Compounds": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/6. Nomenclature of Coordination Compounds.html",
-			"7. Isomerism in Coordination Compounds": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/7. Isomerism in Coordination Compounds.html",
-			"8. Valence Bond Theory (VBT)": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/8. Valence Bond Theory (VBT).html",
-			"9. Magnetic Properties of Coordination Compounds and Limitations of Valence Bond Theory (VBT)": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/9. Magnetic Properties of Coordination Compounds and Limitations of Valence Bond Theory (VBT).html",
-			"10. Crystal Field Theory (CFT), -color of complexes, and limitations of CFT": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/10. Crystal Field Theory (CFT), -color of complexes, and limitations of CFT.html",
-			 "11. metal carbonyls (synergic bonding)-Stability of coordination compounds-Importance and applications of coordination compounds": "https://chemistry-g10ep.github.io/Board-E-Coordination--Comp/11. metal carbonyls (synergic bonding)-Stability of coordination compounds-Importance and applications of coordination compounds.html"
-				},
-						"Chapter 6 - Haloalkanes and Halooarenes": {
-              "1. Classification of compounds containing sp³ C–X bond": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/1. Classification of compounds containing sp³ C–X bond.html",
-			  "2. Classification of compounds containing sp² C–X bond": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/2. Classification of compounds containing sp² C–X bond.html",
-			  "3. Haloalkanes & Haloarenes (Nomenclature)": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/3. Haloalkanes & Haloarenes (Nomenclature).html",
-			  "4. Haloalkanes & Haloarenes - Nature of C–X bond": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/4. Haloalkanes & Haloarenes - Nature of C–X bond.html",
-			  "5. Methods of preparation of haloalkanes from alcohols": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/5. Methods of preparation of haloalkanes from alcohols.html",
-			  "6. Methods of preparation from alkanes by free radical halogenation": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/6. Methods of preparation from alkanes by free radical halogenation.html",
-			  "7. Preparation from alkenes (i) addition of hydrogen halides and (ii) addition of halogens": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/7. Preparation from alkenes (i) addition of hydrogen halides and (ii) addition of halogens.html",
-			  "8. Halogen Exchange Reactions (Finkelstein & Swarts reactions)": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/8. Halogen Exchange Reactions (Finkelstein & Swarts reactions).html",
-			  "9. Preparation of Haloarenes (electrophilic substitution & Sandmeyer reaction)": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/9. Preparation of Haloarenes (electrophilic substitution & Sandmeyer reaction).html",
-			  "10. Physical Properties of Haloalkanes and Haloarenes": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/10. Physical Properties of Haloalkanes and Haloarenes.html",
-			  "11. Chemical Properties of Haloalkanes,(SN1, SN2)": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/11. Chemical Properties of Haloalkanes,(SN1, SN2).html",
-			  "12. Elimination Reactions (β-Elimination, Saytzeff’s rule": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/12. Elimination Reactions (β-Elimination, Saytzeff’s rule.html",
-			  "13. Reactions with Metals (Wurtz Reaction, Formation of Organometallic Compounds)": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/13. Reactions with Metals (Wurtz Reaction, Formation of Organometallic Compounds).html",
-			  "14. Stereochemical Aspects of Nucleophilic Substitution Reactions": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/14. Stereochemical Aspects of Nucleophilic Substitution Reactions.html",
-			  "15. Reaction of Haloarenes — Nucleophilic Substitution": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/15. Reaction of Haloarenes — Nucleophilic Substitution.html",
-			  "16. Electrophilic Substitution Reactions (Nitration, Halogenation, Sulphonation, and Friedel–Crafts Reactions)": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/16. Electrophilic Substitution Reactions (Nitration, Halogenation, Sulphonation, and Friedel–Crafts Reactions).html",
-			  "17. Reaction of Haloarenes – Wurtz–Fittig Reaction, Fittig Reaction & Reactivity": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/17. Reaction of Haloarenes – Wurtz–Fittig Reaction, Fittig Reaction & Reactivity.html",
-			  "18. Polyhalogen Compounds – Dichloromethane, Trichloroethane, Triiodomethane, Tetrachloromethane, Freons, and DDT": "https://chemistry-g10ep.github.io/Board-E-Haloalkane-arenes/18. Polyhalogen Compounds – Dichloromethane, Trichloroethane, Triiodomethane, Tetrachloromethane, Freons, and DDT.html"
-				},
-"Chapter 11 - Alcohol, Phemol and Ether": {
-              "1. Classification of  alcohol, Phenols and Ethers.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/1. Classification of  alcohol, Phenols and Ethers.html",
-			  "2.Nomenclature of Alcohols, Phenols, and Ethers.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/2.Nomenclature of Alcohols, Phenols, and Ethers.html",
-			  "3.Structure of Alcohol, Phenol and Ether.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/3. Structure of Alcohol, Phenol and Ether.html",
-			  "4.preparation of alcohols from alkenes.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/4. preparation of alcohols from alkenes.html",
-			  "5.Preparation of alcohols from carbonyl compounds.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/5. Preparation of alcohols from carbonyl compounds.html",
-			  "6.Preparation of alcohols from Grignard reagents (RMgX).html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/6. Preparation of alcohols from Grignard reagents (RMgX).html",
-			  "7.Preparation of Phenols (from haloarenes, benzene sulphonic acid, diazonium salts, and cumene).html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/7. Preparation of Phenols (from haloarenes, benzene sulphonic acid, diazonium salts, and cumene).html",
-			  "8.Physical Properties of Alcohols and Phenols.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/8. Physical Properties of Alcohols and Phenols.html",
-			  "9.Chemical reactions of alcohols and phenols (Acidity of alcohols and phenols).html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/9. Chemical reactions of alcohols and phenols (Acidity of alcohols and phenols).html",
-			  "10.Chemical reactions of alcohols and phenols with hydrogen halides and phosphorus trihalides..html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/10. Chemical reactions of alcohols and phenols with hydrogen halides and phosphorus trihalides.html",
-			  "11.Chemical reactions of alcohols and phenols (Dehydration and Oxidation.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/11. Chemical reactions of alcohols and phenols (Dehydration and Oxidation).html",
-			  "12. Chemical reaction of Alcohols, Phenols,Esterification and Aspirin preparation.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/12. Chemical reaction of Alcohols, Phenols,Esterification and Aspirin preparation.html",
-			  "13.Chemical reactions of phenols (Electrophilic Aromatic Substitution- Nitration-Halogenation, including H-bonding in nitrophenols.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/13. Chemical reactions of phenols (Electrophilic Aromatic Substitution- Nitration & Halogenation, including H-bonding in nitrophenols).html",
-			  "14.Chemical reactions of phenols-Kolbe’s reaction, Reimer–Tiemann reaction, Reaction of phenol with zinc dust, Oxidation by Na₂Cr₂O₇.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/14. Chemical reactions of phenols-Kolbe’s reaction, Reimer–Tiemann reaction, Reaction of phenol with zinc dust, Oxidation by Na₂Cr₂O₇.html",
-			  "15.Some Commercially Important Alcohols (like methanol, ethanol, ethylene glycol, glycerol, and propanol.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/15. Some Commercially Important Alcohols (like methanol, ethanol, ethylene glycol, glycerol, and propanol.html",
-			  "16. Preparation of Ethers (by dehydration of alcohols and Williamson synthesis).html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/16. Preparation of Ethers (by dehydration of alcohols and Williamson synthesis).html",
-			  "17.Chemical reactions of ethers- Cleavage of C–O bond in ethers, Electrophilic substitution reactions.html": "https://chemistry-g10ep.github.io/Board-E-Alc-Ph-Ether/17. Chemical reactions of ethers- Cleavage of C–O bond in ethers, Electrophilic substitution reactions.html"
-				},
-			"Chapter 12 - Aldehydes, Ketons and Carboxylic Acids": {
-              "1.  Nomenclature and Structure of Carbonyl Groups": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/1.  Nomenclature and Structure of Carbonyl Groups.html",
-			  "2. Preparation of Aldehydes and Ketones by Oxidation of Alcohols and by Dehydrogenation of Alcohols": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/2. Preparation of Aldehydes and Ketones by Oxidation of Alcohols and by Dehydrogenation of Alcohols.html",
-			  "3. Preparation of Aldehydes and Ketones from Hydrocarbons — i By ozonolysis of alkenes, ii By hydration of alkynes ": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/3. Preparation of Aldehydes and Ketones from Hydrocarbons — i By ozonolysis of alkenes, ii By hydration of alkynes .html",
-			  "4. Preparation of Aldehydes from Acyl Chlorides (Acid Chlorides)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/4. Preparation of Aldehydes from Acyl Chlorides (Acid Chlorides).html",
-			  "5. Preparation of Aldehydes from Nitriles and Esters": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/5. Preparation of Aldehydes from Nitriles and Esters.html",
-			  "6. Preparation of Aldehydes from Hydrocarbons i Oxidation of methylbenzene ii Side chain chlorination followed by hydrolysis iii Gattermann–Koch reaction": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/6. Preparation of Aldehydes from Hydrocarbons i Oxidation of methylbenzene ii Side chain chlorination followed by hydrolysis iii Gattermann–Koch reaction.html",
-			  "7. Aldehydes, Ketones and Carboxylic Acids, specifically on Preparation of Ketones from Acyl Chlorides": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/7. Aldehydes, Ketones and Carboxylic Acids, specifically on Preparation of Ketones from Acyl Chlorides.html",
-			  "8. Preparation of Ketones from Nitriles": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/8. Preparation of Ketones from Nitriles.html",
-			  "9. Aldehydes, Ketones and Carboxylic Acids Preparation of Ketones from benzene or substituted benzenes": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/9. Aldehydes, Ketones and Carboxylic Acids Preparation of Ketones from benzene or substituted benzenes.html",
-			  "10. Physical Properties of Aldehydes and Ketones": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/10. Physical Properties of Aldehydes and Ketones.html",
-			  "11. Aldehydes, Ketones mechanism of Nucleophilic Addition Reactions (mechanism included)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/11. Aldehydes, Ketones mechanism of Nucleophilic Addition Reactions (mechanism included).html",
-			  "12. Aldehydes and Ketones (Chemical Reactions – Reactivity)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/12. Aldehydes and Ketones (Chemical Reactions – Reactivity).html",
-			  "13. Aldehydes and Ketones (Nucleophilic Addition + Nucleophilic Addition–Elimination, HCN and NaHSO₃": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/13. Aldehydes and Ketones (Nucleophilic Addition + Nucleophilic Addition–Elimination, HCN and NaHSO₃.html",
-			  "14. Addition of Grignard Reagent and Addition of Alcohol": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/14. Addition of Grignard Reagent and Addition of Alcohol.html",
-			  "15 Aldehydes and Ketones (Addition of Ammonia and Its Derivatives": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/15 Aldehydes and Ketones (Addition of Ammonia and Its Derivatives.html",
-			  "16. Aldehydes and Ketones (Oxidation – a) using KMnO₄ b) Tollen's test c) Fehling's test)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/16. Aldehydes and Ketones (Oxidation – a) using KMnO₄ b) Tollen's test c) Fehling's test).html",
-			  "16. Aldehydes and Ketones (Reduction – a) reduction to alcohol b) reduction to hydrocarbons": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/16. Aldehydes and Ketones (Reduction – a) reduction to alcohol b) reduction to hydrocarbons.html",
-			  "17. Aldehydes and Ketones (Oxidation – a) using KMnO₄ b) Tollen's test c) Fehling's test)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/17. Aldehydes and Ketones (Oxidation – a) using KMnO₄ b) Tollen's test c) Fehling's test).html",
-			  "18. Aldehydes and Ketones (Oxidation of methyl ketones by haloform reaction)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/18. Aldehydes and Ketones (Oxidation of methyl ketones by haloform reaction).html",
-			  "19. Aldehydes and Ketones – Reactions due to α-hydrogen (Aldol condensation and Cross Aldol condensation)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/19. Aldehydes and Ketones – Reactions due to α-hydrogen (Aldol condensation and Cross Aldol condensation).html",
-			  "20. Aldehydes and Ketones — Cannizzaro Reaction and Electrophilic Substitution Reaction": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/20. Aldehydes and Ketones — Cannizzaro Reaction and Electrophilic Substitution Reaction.html",
-			  "21. Nomenclature and Structure of the Carboxyl Group": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/21. Nomenclature and Structure of the Carboxyl Group.html",
-			  "22. Preparation of Carboxylic Acids (from primary alcohols, aldehydes, and alkylbenzenes)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/22. Preparation of Carboxylic Acids (from primary alcohols, aldehydes, and alkylbenzenes).html",
-			  "23. Preparation of carboxylic acids from nitriles, amides, and Grignard reagents": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/23. Preparation of carboxylic acids from nitriles, amides, and Grignard reagents.html",
-			  "24. Preparation of carboxylic acids from acid chlorides, anhydrides, and esters": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/24. Preparation of carboxylic acids from acid chlorides, anhydrides, and esters.html",
-			  "25. Physical Properties and Acidic Nature of Carboxylic Acids (Hydrogen bonding, boiling points, acidity order, etc": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/25. Physical Properties and Acidic Nature of Carboxylic Acids (Hydrogen bonding, boiling points, acidity order, etc.html",
-			  "26. Chemical Reactions of Carboxylic Acids (Reactions with bases, metals, and formation of derivatives)": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/26. Chemical Reactions of Carboxylic Acids (Reactions with bases, metals, and formation of derivatives).html",
-			  "27. Reactions Involving Cleavage of C–OH Bond — Formation of Anhydrides and Esterification": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/27. Reactions Involving Cleavage of C–OH Bond — Formation of Anhydrides and Esterification.html",
-			  "28. Reduction and Decarboxylation of Carboxylic Acids": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/28. Reduction and Decarboxylation of Carboxylic Acids.html",
-			  "29. Substitution Reactions of Carboxylic acids": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/29. Substitution Reactions of Carboxylic acids.html",
-			  "30. Uses of Aldehydes, Ketones, and Carboxylic Acids": "https://chemistry-g10ep.github.io/Board-E-Ald-Ket-Carb-Acid/30. Uses of Aldehydes, Ketones, and Carboxylic Acids.html"
-				},
-			"Chapter 13 - Amines": {
-              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"
-				},
-			"Chapter 14 - Biomolecules": {
-              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"
-				},
-		
-            "Chapter 16 - Coming Soon": {
-              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"		  
-		  }
-          },
-  "Assertion & Reasoning Questions Coming Soon": {
-                       "Chapter 1 - Coming Soon": {
-              "Coming Soon": "https://gten-educational-platform.ithub.io/Class-12/new 7.html",
-              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/units-measurements/basic/significant-figures.html",
-			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/units-measurements/basic/significant-figures.html"
-            },
-            "Chapter 2 - Coming Soon": {
-              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"
-
-			   },
-			"Chapter 3 - Coming Soon": {
-              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-				},
-            "Chapter 4 - Coming Soon": {
-              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
-			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"	
-            }
-          },
- 
- "Topic wise mcq (hard) Coming Soon": {
-            "Chapter 1 - Coming Soon": {
-              "Coming Soon": "https://gten-eduational-platform.github.io/Class-12/new 7.html"
-            }
-          },
-"PYQ advance Coming Soon": {
-            "Chapter 1 - Coming Soon": {
-              "2023 Set A Coming Soon": "https://gten-educational-patform.github.io/Class-12/new 7.html",
-              "2022 Set B Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/pyq-board/2022-set-b.html"
-    }
-  }
+/* === SESSION VALIDATION === */
+window.onload=async function(){
+ const savedEmail=localStorage.getItem("studentEmail");
+ const token=localStorage.getItem("sessionToken");
+ if(!savedEmail||!token)return;
+ const res=await fetch(`${BACKEND_URL}/validate`,{
+  method:"POST",headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({email:savedEmail,token})
+ });
+ const data=await res.json();
+ if(data.valid){
+  document.getElementById("loginContainer").style.display="none";
+  document.getElementById("appContainer").style.display="block";
+ } else localStorage.clear();
 };
 
-    const levelSelect   = document.getElementById('levelSelect');
-    const chapterSelect = document.getElementById('chapterSelect');
-    const itemSelect    = document.getElementById('itemSelect');
-    const topicLabel    = document.getElementById('topicLabel');
-    const viewer        = document.getElementById('viewer');
-    const controls      = document.getElementById('controls');
-    const headerBar     = document.getElementById('headerBar');
+/* === AUTO LOGOUT === */
+setInterval(async()=>{
+ const email=localStorage.getItem("studentEmail");
+ const token=localStorage.getItem("sessionToken");
+ if(!email||!token)return;
+ const res=await fetch(`${BACKEND_URL}/validate`,{
+  method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,token})
+ });
+ const data=await res.json();
+ if(!data.valid){
+  alert("⚠️ You have been logged out because this account was opened on another device.");
+  localStorage.clear();location.reload();
+ }
+},5000);
 
-    function resetSelect(selectEl, placeholderText, disable = false) {
-      selectEl.innerHTML = `<option value="">${placeholderText}</option>`;
-      selectEl.disabled = disable;
-    }
-    function fillSelect(selectEl, items) { items.forEach(v => { selectEl.innerHTML += `<option value="${v}">${v}</option>`; }); selectEl.disabled = false; }
-    function getKeys(obj) { return obj ? Object.keys(obj) : []; }
+/* === MAIN LOGIC === */
+   const catalog = {};
 
-    levelSelect.addEventListener('change', () => {
-      const lvl = levelSelect.value;
-      resetSelect(chapterSelect, 'Select Chapter', true);
-      resetSelect(itemSelect, 'Select Topic / Year', true);
-      viewer.src = '';
-      viewer.style.height = "450px";
-      if (!lvl || !catalog[lvl]) return;
-      fillSelect(chapterSelect, getKeys(catalog[lvl]));
-    });
+const levelSelect=document.getElementById('levelSelect');
+const chapterSelect=document.getElementById('chapterSelect');
+const itemSelect=document.getElementById('itemSelect');
+const topicLabel=document.getElementById('topicLabel');
+const viewer=document.getElementById('viewer');
+const controls=document.getElementById('controls');
+const headerBar=document.getElementById('headerBar');
 
-    chapterSelect.addEventListener('change', () => {
-      const lvl  = levelSelect.value;
-      const chap = chapterSelect.value;
-      resetSelect(itemSelect, 'Select Topic / Year', true);
-      viewer.src = '';
-      viewer.style.height = "450px";
-      if (!lvl || !chap || !catalog[lvl]?.[chap]) return;
-      fillSelect(itemSelect, getKeys(catalog[lvl][chap]));
-    });
+function resetSelect(sel,txt,dis=false){sel.innerHTML=`<option value="">${txt}</option>`;sel.disabled=dis;}
+function fillSelect(sel,items){items.forEach(v=>{sel.innerHTML+=`<option value="${v}">${v}</option>`});sel.disabled=false;}
+function getKeys(o){return o?Object.keys(o):[];}
 
-    itemSelect.addEventListener('change', () => { if (itemSelect.value) loadURL(); });
+levelSelect.addEventListener('change',()=>{
+ const lvl=levelSelect.value;
+ resetSelect(chapterSelect,'Select Chapter',true);
+ resetSelect(itemSelect,'Select Topic / Year',true);
+ viewer.src='';
+ if(!lvl||!catalog[lvl])return;
+ fillSelect(chapterSelect,getKeys(catalog[lvl]));
+});
+chapterSelect.addEventListener('change',()=>{
+ const lvl=levelSelect.value;
+ const chap=chapterSelect.value;
+ resetSelect(itemSelect,'Select Topic / Year',true);
+ viewer.src='';
+ if(!lvl||!chap||!catalog[lvl]?.[chap])return;
+ fillSelect(itemSelect,getKeys(catalog[lvl][chap]));
+});
+itemSelect.addEventListener('change',()=>{if(itemSelect.value)loadURL();});
 
-    function loadURL() {
-      const lvl  = levelSelect.value;
-      const chap = chapterSelect.value;
-      const item = itemSelect.value;
-      if (!lvl || !chap || !item) return;
-      const url = catalog[lvl][chap][item];
-      viewer.src = url;
-      viewer.style.height = "650px";
-      controls.classList.add('hidden');
+function loadURL(){
+ const lvl=levelSelect.value,chap=chapterSelect.value,item=itemSelect.value;
+ if(!lvl||!chap||!item)return;
+ const url=catalog[lvl][chap][item];
+ viewer.src=url;
+ viewer.style.height="650px";
+ controls.classList.add('hidden');
 
-      let inlineDiv = document.createElement('div');
-      inlineDiv.className = 'inline-topic';
-      inlineDiv.appendChild(topicLabel);
-      inlineDiv.appendChild(itemSelect);
+ // === Move Topic Dropdown depending on device ===
+ const inlineDiv=document.createElement('div');
+ inlineDiv.className='inline-topic';
+ inlineDiv.appendChild(topicLabel);
+ inlineDiv.appendChild(itemSelect);
 
-      if (window.innerWidth > 600) {
-        headerBar.appendChild(inlineDiv);
-      } else {
-        controls.appendChild(topicLabel);
-        controls.appendChild(itemSelect);
-      }
-    }
+ if(window.innerWidth <= 600){
+   headerBar.insertAdjacentElement('afterend', inlineDiv);
+ } else {
+   headerBar.appendChild(inlineDiv);
+ }
+}
 
-    function resetAll() {
-      viewer.src = '';
-      viewer.style.height = "450px";
-      resetSelect(levelSelect, 'Select Level / Years', false);
-      resetSelect(chapterSelect, 'Select Chapter', true);
-      resetSelect(itemSelect, 'Select Topic / Year', true);
-      fillSelect(levelSelect, getKeys(catalog));
-      controls.classList.remove('hidden');
-      const inline = headerBar.querySelector('.inline-topic');
-      if (inline) inline.remove();
-      controls.appendChild(topicLabel);
-      controls.appendChild(itemSelect);
-    }
+function resetAll(){
+ viewer.src='';
+ viewer.style.height="450px";
+ resetSelect(levelSelect,'Select Level / Years',false);
+ resetSelect(chapterSelect,'Select Chapter',true);
+ resetSelect(itemSelect,'Select Topic / Year',true);
+ fillSelect(levelSelect,getKeys(catalog));
+ controls.classList.remove('hidden');
 
-    window.addEventListener('resize', () => {
-      const inline = headerBar.querySelector('.inline-topic');
-      if (inline && window.innerWidth <= 600) {
-        controls.appendChild(topicLabel);
-        controls.appendChild(itemSelect);
-        inline.remove();
-      }
-    });
+ // === Remove inline Topic selector (header/below) and restore original ===
+ document.querySelectorAll('.inline-topic').forEach(el=>el.remove());
+ // restore topic label & select to control panel
+ controls.appendChild(topicLabel);
+ controls.appendChild(itemSelect);
+}
 
-    fillSelect(levelSelect, getKeys(catalog));
-  </script>
-</body>
+fillSelect(levelSelect,getKeys(catalog));
+
+/* === MOBILE AUTO HEADER SCROLL === */
+if(window.innerWidth<=600){
+ const bar=document.getElementById("headerBar");
+ let direction=1;
+ setInterval(()=>{
+  if(bar.scrollWidth>bar.clientWidth){
+   if(bar.scrollLeft+bar.clientWidth>=bar.scrollWidth-5)direction=-1;
+   else if(bar.scrollLeft<=5)direction=1;
+   bar.scrollBy({left:50*direction,behavior:"smooth"});
+  }
+ },3000);
+}
+</script>
 </html>
