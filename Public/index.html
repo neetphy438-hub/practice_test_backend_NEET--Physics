@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NEET Practice Test</title>
+<title>Class NEET Practice Test</title>
 <style>
 /* ==== YOUR ORIGINAL STYLE (unchanged) ==== */
 body {
@@ -196,6 +196,53 @@ select option:nth-child(even){background-color:#e8f4ff;}
 select option:nth-child(odd){background-color:#fff;}
 .hidden{display:none;}
 .inline-topic{display:flex;align-items:center;gap:4px;margin-left:auto;font-size:12px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.register-btn{
+  display:inline-block;
+  padding:10px 16px;
+  background:linear-gradient(135deg, #ff9800, #f57c00);
+  color:white;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:bold;
+  text-decoration:none;
+  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+.register-btn:hover{
+  background:linear-gradient(135deg, #ffa726, #ef6c00);
+  transform:translateY(-2px);
+  box-shadow:0 6px 12px rgba(0,0,0,0.3);
+}
+
+
+
+
+
+
+
+
+
 </style>
 </head>
 
@@ -215,6 +262,31 @@ select option:nth-child(odd){background-color:#fff;}
     </ul>
   </div>
   <input type="email" id="emailInput" placeholder="Enter your email" required />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <p id="loginError" style="color:red; font-size:13px; margin-top:5px;"></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <button onclick="login()">Login</button>
   <div id="aboutBox">
     <strong>About G10 Educational Platform:</strong><br>
@@ -226,7 +298,7 @@ select option:nth-child(odd){background-color:#fff;}
 <div id="appContainer">
   <div class="header-bar" id="headerBar">
   
-    <h1>NEET Physics Practice Test</h1>
+    <h1>IIT-JEE Physics Practice Test</h1>
 	
     <div style="display:flex; gap:4px;">
       <button id="backBtn" class="back-btn" onclick="resetAll()">Back</button>
@@ -249,23 +321,87 @@ select option:nth-child(odd){background-color:#fff;}
 <script>
 const BACKEND_URL="https://practice-test-backend-neet-physics-15fq.onrender.com";
 
+
+
+
+
+
+
+
+
+
 /* === LOGIN LOGIC === */
 async function login(){
  const email=document.getElementById("emailInput").value.trim().toLowerCase();
- if(!email||!email.includes("@")){
-  alert("Your E.Mail ID is not Registered. For registration call +91 9706380857.");return;
+ const errorBox = document.getElementById("loginError");
+
+ // ❗ Step 1: Format validation
+ if(!email || !email.includes("@")){
+  errorBox.innerHTML = `
+    Your E-Mail ID is not registered.<br><br>
+    <a href="https://gten-educational-platform.github.io/Class-12/email.html" target="_blank" class="register-btn">
+      Register Now
+    </a>
+  `;
+  return;
+ } else {
+  errorBox.innerHTML = "";
  }
- const res=await fetch(`${BACKEND_URL}/login`,{
-  method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})
- });
- const data=await res.json();
- if(data.token){
-  localStorage.setItem("studentEmail",email);
-  localStorage.setItem("sessionToken",data.token);
-  document.getElementById("loginContainer").style.display="none";
-  document.getElementById("appContainer").style.display="block";
- } else alert("Login failed. Try again.");
+
+ try {
+   const res=await fetch(`${BACKEND_URL}/login`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email})
+   });
+
+   const data=await res.json();
+
+   // ❗ Step 2: Backend validation
+   if(data.token){
+    localStorage.setItem("studentEmail",email);
+    localStorage.setItem("sessionToken",data.token);
+    document.getElementById("loginContainer").style.display="none";
+    document.getElementById("appContainer").style.display="block";
+   } else {
+    errorBox.innerHTML = `
+      Your E-Mail ID is not registered.<br><br>
+      <a href="https://gten-educational-platform.github.io/Class-12/email.html"
+   target="_blank"
+   class="register-btn"
+   onclick="this.style.display='none'">
+  Register Now
+</a>
+    `;
+   }
+
+ } catch (err) {
+   errorBox.innerText = "Server error. Try later.";
+ }
 }
+
+document.getElementById("emailInput").addEventListener("input", function() {
+  const errorBox = document.getElementById("loginError");
+  errorBox.innerHTML = ""; // 🔥 clears error + hides Register button
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* === SESSION VALIDATION === */
 window.onload=async function(){
@@ -299,7 +435,291 @@ setInterval(async()=>{
 },5000);
 
 /* === MAIN LOGIC === */
-   const catalog = {};
+  const catalog = {
+  "Topic wise mcq (basic)": {
+               "Chapter 1 - UNITS, DIMENSIONS AND MEASUREMENT": {
+              "1. Units, Dimensions and Measurement — covering Physical Quantity, Ratio (numerical value only), Scalar (magnitude only), Vector (magnitude + direction)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/1. Units, Dimensions and Measurement — covering Physical Quantity, Ratio (numerical value only), Scalar (magnitude only), Vector (magnitude + direction).html",
+              "2. Fundamental and Derived Quantities": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/2. Fundamental and Derived Quantities.html",
+			  "3. Fundamental and Derived Units focusing on System of Units (CGS, MKS, FPS, SI)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/3. Fundamental and Derived Units focusing on System of Units (CGS, MKS, FPS, SI).html",
+			  "4. SI Prefixes (prefixes and their symbols)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/4. SI Prefixes (prefixes and their symbols).html",
+			  "5. Covers Length, Mass, Time": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/5. Covers Length, Mass, Time.html",
+			  "6. Quantities Having the Same Dimensions": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/6. Quantities Having the Same Dimensions.html",
+			  "7. Important Dimensions of Heat-related quantities": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/7. Important Dimensions of Heat-related quantities.html",
+			  "8. Electricity (Dimensions & Units)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/8. Electricity (Dimensions & Units).html",
+			  "9. Application of Dimensional Analysis": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/9. Application of Dimensional Analysis.html",
+			  "10. Limitations of Dimensional Analysis": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/10. Limitations of Dimensional Analysis.html",
+			  "11. Significant Figures & Rounding Off": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/10. Significant Figures & Rounding Off.html",
+			  "12. Calculation questions on Significant Figures": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/11. calculation questions on Significant Figures.html",
+			  "13. Order of Magnitude -Errors of Measurement (Absolute error, mean absolute error, percentage error),Propagation of Errors ": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Units-and-Measurement/12. Order of Magnitude -Errors of Measurement (Absolute error, mean absolute error, percentage error),Propagation of Errors .html"
+            },
+     "Chapter 2 - MOTION IN ONE DIMENSION": {
+              "1. Motion in One Dimension covering-Position-Rest and Motion-Types of motion (1D, 2D, 3D)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/1. Motion in One Dimension covering-Position-Rest and Motion-Types of motion (1D, 2D, 3D).html",
+			 "2. Particle,Point Mass,Point Object-Distance and Displacement-Comparison between Distance & Displacement": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/2. Particle,Point Mass,Point Object-Distance and Displacement-Comparison between Distance & Displacement.html",
+			 "3. Speed and Velocity covering-Definition (scalar vs vector)-Dimensions & Units-Types (average, instantaneous, uniform, variable)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/3. Speed and Velocity covering-Definition (scalar vs vector)-Dimensions & Units-Types (average, instantaneous, uniform, variable).html",
+			 "4. Comparison between instantaneous speed & instantaneous velocity-Comparison between average speed & average velocity": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/4. Comparison between instantaneous speed & instantaneous velocity-Comparison between average speed & average velocity.html",
+			 "5. Acceleration (covering definition, units, dimensions, and types)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/5. Acceleration (covering definition, units, dimensions, and types).html",
+			 "6. Position-Time Graphs and Velocity-Time Graphs, including distance, displacement, and acceleration calculations": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/6. Position-Time Graphs and Velocity-Time Graphs, including distance, displacement, and acceleration calculations.html",
+			 "7. Equations of Kinematics, covering zero acceleration and constant acceleration cases": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/7. Equations of Kinematics, covering zero acceleration and constant acceleration cases.html",
+			 "8. Motion of a Body under Gravity (Free Fall) covering free fall, downward projection, and upward projection": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/8. Motion of a Body under Gravity (Free Fall) covering free fall, downward projection, and upward projection.html",
+			 "9. Motion with Variable Acceleration": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-one-D/9. Motion with Variable Acceleration.html"
+			   },
+	"Chapter 3 - MOTION IN TWO DIMENSION": {
+              "1. Introduction of Projectile Motion (Projectile, Assumptions, Independence of Motions)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/1. Introduction of Projectile Motion (Projectile, Assumptions, Independence of Motions).html",
+			  "2. Types of Projectile Motion (Oblique Projectile), covering equation of trajectory, displacement vector, and instantaneous velocity": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/2. Types of Projectile Motion (Oblique Projectile), covering equation of trajectory, displacement vector, and instantaneous velocity.html",
+			  "3. Oblique Projectile Motion – Change in Velocity, Momentum, Angular Momentum": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/3. Oblique Projectile Motion – Change in Velocity, Momentum, Angular Momentum.html",
+			  "4. Oblique Projectile Motion – Time of Flight, Horizontal Range, Maximum Height": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/4. Oblique Projectile Motion – Time of Flight, Horizontal Range, Maximum Height.html",
+			  "5. Oblique Projectile Motion –Projectile passing through two points at the same height at times,𝑡1t1 and 𝑡2t2-Motion of a projectile as observed from another projectile-Energy of a projectile": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/5. Oblique Projectile Motion –Projectile passing through two points at the same height at times,𝑡1t1 and 𝑡2t2-Motion of a projectile as observed from another projectile-Energy of a projectile.html",
+			  "6. Horizontal Projectile Motion covering-Trajectory of horizontal projectile-Displacement vector-Instantaneous velocity": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/6. Horizontal Projectile Motion covering-Trajectory of horizontal projectile-Displacement vector-Instantaneous velocity.html",
+			  "7. Horizontal Projectile Motion covering-Time of flight-Horizontal range-Case of projectiles A & B with different velocities-Case of particles projected with same initial speed in different directions": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/7. Horizontal Projectile Motion covering-Time of flight-Horizontal range-Case of projectiles A & B with different velocities-Case of particles projected with same initial speed in different directions.html",
+			  "8. Projectile Motion on an Inclined Plane-Time of flight-Maximum height-Horizontal range": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/8. Projectile Motion on an Inclined Plane-Time of flight-Maximum height-Horizontal range.html",
+			  "9. Circular Motion – Variables (Displacement & Distance)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/9. Circular Motion – Variables (Displacement & Distance).html",
+			  "10. Circular Motion – Angular Displacement (θ)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/10. Circular Motion – Angular Displacement (θ).html",
+			  "11. Circular Motion – Angular Velocity (ω)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/11. Circular Motion – Angular Velocity (ω).html",
+			  "12. Circular Motion – Time Period (T)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/12. Circular Motion – Time Period (T).html",
+			  "13. Circular Motion – Frequency": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/13. Circular Motion – Frequency.html",
+			  "14. Circular Motion – Angular Acceleration (α)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/14. Circular Motion – Angular Acceleration (α).html",
+			  "15. Circular Motion – Centripetal Acceleration (magnitude & direction)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/15. Circular Motion – Centripetal Acceleration (magnitude & direction).html",
+			  "16. Circular Motion – Centripetal Force, Centrifugal Force, and Work Done by Centripetal Force": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/16. Circular Motion – Centripetal Force, Centrifugal Force, and Work Done by Centripetal Force.html",
+			  "17. Skidding of Vehicle on a Level Road & Rotating Platform": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/17. Skidding of Vehicle on a Level Road & Rotating Platform.html",
+			  "18. Bending of a Cyclist & Banking of a Road": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/18. Bending of a Cyclist & Banking of a Road.html",
+			  "19. Overturning of Vehicle and Motion of Charged Particle In Magnetic Field": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/19. Overturning of Vehicle and Motion of Charged Particle In Magnetic Field.html",
+			  "20. Reaction of Road On Car": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/20. Reaction of Road On Car.html",
+			  "21. Non-Uniform Circular Motion Tangential acceleration Centripetal (Radial) acceleration Force": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/21. Non-Uniform Circular Motion Tangential acceleration Centripetal (Radial) acceleration Force.html",
+			  "22. Motion in vertical circle- Velocity at any point on vertical loop and Tension at any point on vertical loop": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/22. Motion in vertical circle- Velocity at any point on vertical loop and Tension at any point on vertical loop.html",
+			  "23. Motion in vertical circle -Critical condition for vertical looping and Motion of a block on frictionless hemisphere": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/23. Motion in vertical circle -Critical condition for vertical looping and Motion of a block on frictionless hemisphere.html",
+			  "24. Conical Pendulum -Tension in the string": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Motion-in-two-D/24. Conical Pendulum -Tension in the string.html"
+				},
+	  
+	"Chapter 4 - NEWTON'S LAWS OF MOTION": {
+              "1. Newton Laws of Motion (Point Mass Inertia & Linear Momentum)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/1. Newton Laws of Motion (Point Mass Inertia & Linear Momentum).html",
+			  "2. Newton’s First Law Inertia of rest Inertia of motion Inertia of direction": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/2. Newton’s First Law Inertia of rest Inertia of motion Inertia of direction.html",
+			  "3. Newton’s Second Law": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/3. Newton’s Second Law.html",
+			  "4. Force- Various condition of force application Dimension Constant force Variable or dependent force Central force Conservative or non conservative force Common forces in mechanics": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/4. Force- Various condition of force application Dimension Constant force Variable or dependent force Central force Conservative or non conservative force Common forces in mechanics.html",
+			  "5. Equilibrium of Concurrent Forces including Lami’s Theorem": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/5. Equilibrium of Concurrent Forces including Lami’s Theorem.html",
+			  "6. Newton’s Third Law of Motion": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/6. Newton’s Third Law of Motion.html",
+			  "7. Frame of Reference covering Inertial and Non-inertial frames": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/7. Frame of Reference covering Inertial and Non-inertial frames.html",
+			  "8. Law of Conservation of Linear Momentum, covering Recoiling of a gun and Rocket propulsion": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/8. Law of Conservation of Linear Momentum, covering Recoiling of a gun and Rocket propulsion.html",
+			  "9. Free Body Diagram (FBD) focusing on Apparent Weight of a Body in a Lift": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/9. Free Body Diagram (FBD) focusing on Apparent Weight of a Body in a Lift.html",
+			  "10. Acceleration of a Block on a Horizontal Smooth Surface": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/10. Acceleration of a Block on a Horizontal Smooth Surface.html",
+			  "11.Acceleration of a Block on a Smooth Inclined Plane": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/11.Acceleration of a Block on a Smooth Inclined Plane.html",
+			  "12. Motion of Blocks in Contact": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/12. Motion of Blocks in Contact.html",
+			  "13. Motion of Connected Blocks Over a Pulley": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/13. Motion of Connected Blocks Over a Pulley.html",
+			  "14. Motion of a Massive String": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/14. Motion of a Massive String.html",
+			  "15. Spring Balance & Physical Balance": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/15. Spring Balance & Physical Balance.html",
+			  "16. Modification of Newton’s Laws of Motion": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--NEWton-law-of-motion/16. Modification of Newton’s Laws of Motion.html"
+				},				
+	"Chapter 5 - FRICTION": {
+              "1.Friction (Introduction, Types of Friction, Static, Limiting, Kinetic,Sliding, Rolling)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/1.Friction (Introduction, Types of Friction, Static, Limiting, Kinetic,Sliding, Rolling).html",
+			  "2. Graph Between Applied Force and Force of Friction": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/2. Graph Between Applied Force and Force of Friction.html",
+			  "3. Friction as a Cause of Motion and Advantages & Disadvantages of Friction": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/3. Friction as a Cause of Motion and Advantages & Disadvantages of Friction.html",
+			  "4. Methods of Changing Friction & Angle of Friction": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/4. Methods of Changing Friction & Angle of Friction.html",
+			  "5. Resultant Force Exerted by Surface on Block & Angle of Repose": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/5. Resultant Force Exerted by Surface on Block & Angle of Repose.html",
+			  "6. Calculation of Required Force in Different Situations.Covers- pulling, pushing, inclined plane (upward, downward), avoiding sliding, horizontal motion": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/6. Calculation of Required Force in Different Situations.Covers- pulling, pushing, inclined plane (upward, downward), avoiding sliding, horizontal motion.html",
+			  "7. Acceleration of a Block on Horizontal Surface": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/7. Acceleration of a Block on Horizontal Surface.html",
+			  "8. Work Done Over a Rough Inclined Surface & Work Done Over a Horizontal Surface": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/8. Work Done Over a Rough Inclined Surface & Work Done Over a Horizontal Surface.html",
+			  "9. Motion of Two Bodies, One Resting on the Other, covering all four cases": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/9. Motion of Two Bodies, One Resting on the Other, covering all four cases.html",
+			  "10. Motion of Two Bodies, One Resting on the Other — Force applied to the lower body,covering the four cases": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/10. Motion of Two Bodies, One Resting on the Other — Force applied to the lower body,covering the four cases.html",
+			  "11. Motion of an Insect in the Rough Bowl": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/11. Motion of an Insect in the Rough Bowl.html",
+			  "12. Minimum Mass Hung from the String to Just Start the Motion-Horizontal plane-Inclined plane (angle θ)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/12. Minimum Mass Hung from the String to Just Start the Motion-Horizontal plane-Inclined plane (angle θ).html",
+			  "13. Maximum Length of Hung Chain and Coefficient of Friction Between a Body and Wedge": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/13. Maximum Length of Hung Chain and Coefficient of Friction Between a Body and Wedge.html",
+			  "14. Stopping of Block Due to Friction- On horizontal road- ( Distance travelled before coming to rest and Time taken to come to rest) On inclined road": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/14. Stopping of Block Due to Friction- On horizontal road- ( Distance travelled before coming to rest and Time taken to come to rest) On inclined road.html",
+			  "15. Stopping of Two Blocks Due to Friction and Velocity at the Bottom of Rough Wedge": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/15. Stopping of Two Blocks Due to Friction and Velocity at the Bottom of Rough Wedge.html",
+			  "16. Sticking of a Block With Accelerated Cart Sticking of a Person with the Wall of Rotor": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--friction/16. Sticking of a Block With Accelerated Cart Sticking of a Person with the Wall of Rotor.html"
+				},
+	  "Chapter 6 - Work, Energy & Power": {
+              "1. Work Done by a Constant Force": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/1. Work Done by a Constant Force.html",
+			  "2. Nature of Work Done (positive work, negative work, and zero work)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/2. Nature of Work Done (positive work, negative work, and zero work).html",
+			  "3. Work Done by a Variable Force, Dimensions and Units of Work": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/3. Work Done by a Variable Force, Dimensions and Units of Work.html",
+			  "4. Work Done Calculation by Force–Displacement Graph": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/4. Work Done Calculation by Force–Displacement Graph.html",
+			  "5. Work done in conservative fields,Non-conservative forces,Work depends on frame of reference": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/5. Work done in conservative fields,Non-conservative forces,Work depends on frame of reference.html",
+			  "6. Introduction to Energy": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/6. Introduction to Energy.html",
+			  "7. Kinetic Energy covering-The expression, Derivation via calculus,work–energy theorem,Dependence of kinetic energy on the frame of reference": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/7. Kinetic Energy covering-The expression, Derivation via calculus,work–energy theorem,Dependence of kinetic energy on the frame of reference.html",
+			  "8. Relativistic kinetic energy, work–energy theorem, relation of K.E. with momentum, and graphs of K.E": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/8. Relativistic kinetic energy, work–energy theorem, relation of K.E. with momentum, and graphs of K.E.html",
+			  "9. Stopping of a Vehicle by Retarding Force": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/9. Stopping of a Vehicle by Retarding Force.html",
+			  "10. Potential Energy": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/10. Potential Energy.html",
+			  "11. Elastic Potential Energy": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/11. Elastic Potential Energy.html",
+			  "12. Electrical Potential Energy and Gravitational Potential Energy": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/12. Electrical Potential Energy and Gravitational Potential Energy.html",
+			  "13. Work Done in Pulling the Chain Against Gravity & Velocity of Chain While Leaving the Table": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/13. Work Done in Pulling the Chain Against Gravity & Velocity of Chain While Leaving the Table.html",
+			  "14. Law of Conservation of Energy and Total Energy": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/14. Law of Conservation of Energy and Total Energy.html",
+			  "15. Power Introduction": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/15. Power Introduction.html",
+			  "16. Position and Velocity of an Automobile w.r.t Time": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/16. Position and Velocity of an Automobile w.r.t Time.html",
+			  "17. Collision Stages of collision-Momentum and energy conservation in collision, Types of collision": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/17. Collision Stages of collision-Momentum and energy conservation in collision, Types of collision.html",
+			  "18. Perfectly Elastic Head-On Collisions, Special cases": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/18. Perfectly Elastic Head-On Collisions, Special cases.html",
+			  "19. Kinetic Energy Transfer During Head-On Elastic Collisions": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/19. Kinetic Energy Transfer During Head-On Elastic Collisions.html",
+			  "20. Perfectly Elastic Oblique Collision and Head-On Inelastic Collision": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/20. Perfectly Elastic Oblique Collision and Head-On Inelastic Collision.html",
+			  "21. Rebounding of a Ball After Collision with Ground": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/21. Rebounding of a Ball After Collision with Ground.html",
+			 "22. Perfectly Inelastic Collision (same and opposite directions)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/22. Perfectly Inelastic Collision (same and opposite directions).html",
+			 "23. Collision Between Bullet and Vertically Suspended Block": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--work-Eng-power/23. Collision Between Bullet and Vertically Suspended Block.html"
+				},
+	  		"Chapter 7 - Rotational Motion": {
+              "1. Introduction": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/1. Introduction.html",
+			  "2. Centre of MassCentre of Mass": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/2. Centre of MassCentre of Mass.html",
+			  "3. Angular Displacement": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/3. Angular Displacement.html",
+			  "4. Angular Velocity": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/4. Angular Velocity.html",
+			  "5. Angular Acceleration": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/5. Angular Acceleration.html",
+			  "6. Moment of Inertia (Rotational Inertia)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/6. Moment of Inertia (Rotational Inertia).html",
+			  "7. Radius of Gyration": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/7. Radius of Gyration.html",
+			  "8. Theorem of Perpendicular Axes": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/8. Theorem of Perpendicular Axes.html",
+			  "9. Moment of Inertia of Two Point Masses + Disc-Ring comparison": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/9. Moment of Inertia of Two Point Masses + Disc-Ring comparison.html",
+			  "10. Moment of Inertia of Two Point Masses- Cylinder": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/10. Moment of Inertia of Two Point Masses- Cylinder.html",
+			  "11. Moment of Inertia of Two Point Masses About Their Centre of Mass-Sphere": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/11. Moment of Inertia of Two Point Masses About Their Centre of Mass-Sphere.html",
+			  "12 Moment of Inertia of Two Point Masses About Their Centre of Mass –Road and Rectangular Plate (Lamina)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/12 Moment of Inertia of Two Point Masses About Their Centre of Mass –Road and Rectangular Plate (Lamina).html",
+			  "13. Moment of Inertia of Two Point Masses About Their Centre of Mass – Cuboid -Hemisphere - Cone": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/13. Moment of Inertia of Two Point Masses About Their Centre of Mass – Cuboid -Hemisphere - Cone.html",
+			  "14. Torque (Moment of Force)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/14. Torque (Moment of Force).html",
+			  "15. Couple": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/15. Couple.html",
+			  "16. Angular Momentum": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/16. Angular Momentum.html",
+			  "17. Law of Conservation of Angular Momentum": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/17. Law of Conservation of Angular Momentum.html",
+			  "18. Work, Energy & Power for a Rotating Body": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/18. Work, Energy & Power for a Rotating Body.html",
+			  "19. Slipping, Spinning, and Rolling": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/19. Slipping, Spinning, and Rolling.html",
+			  "20. Rolling Without Slipping": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/20. Rolling Without Slipping.html",
+			  "21. Rolling Without Slipping on an Inclined Plane": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/21. Rolling Without Slipping on an Inclined Plane.html",
+			  "22. Motion of a Connected Mass (Rolling Without Slipping)": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/22. Motion of a Connected Mass (Rolling Without Slipping).html",
+			  "23. Time Period of Compound Pendulum": "https://g10educationalplatform-physics.github.io/IIT-JEE-E--Rotational-Motion/23. Time Period of Compound Pendulum.html"
+			  
+				},
+			"Chapter 6 - Coming Soon": {
+              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+				},
+            "Chapter 7 - Coming Soon": {
+              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"		  
+		  }
+  },
+	
+ "Topic wise mcq (medium) ": {
+            "Chapter 1 - WORK ENERGY AND POWER": {
+              "1 Work Done by Constant Force 1 ": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/1 Work Done by Constant Force 1 .html",
+              "1 Work Done by Constant Force 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/1 Work Done by Constant Force 2.html",
+			  "2 Work Done by Variable Force": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/2 Work Done by Variable Force.html",
+			  "3 Conservation of Energy and Momentum 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/3 Conservation of Energy and Momentum 1.html",
+			  "3 Conservation of Energy and Momentum 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/3 Conservation of Energy and Momentum 2.html",
+			  "3 Conservation of Energy and Momentum 3": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/3 Conservation of Energy and Momentum 3.html",
+			  "4 Power": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/4 Power.html",
+			  "5 Elastic and Inelastic Collision  1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/5 Elastic and Inelastic Collision  1.html",
+			  "5 Elastic and Inelastic Collision  2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/5 Elastic and Inelastic Collision  2.html",
+			  "5 Elastic and Inelastic Collision  3": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/5 Elastic and Inelastic Collision  3.html",
+			  "6 Perfectly Inelastic Collision": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/6 Perfectly Inelastic Collision.html",
+			  "7 Graphical Question ": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Work-Energy-and-Power/7 Graphical Question .html"
+           },
+	      "Chapter 3 - MOTION IN 2D": {
+              "1 Uniform Circular Motion 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/1 Uniform Circular Motion 1.html",
+			 "1 Uniform Circular Motion 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/1 Uniform Circular Motion 2.html",
+			 "1 Uniform Circular Motion 3": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/1 Uniform Circular Motion 3.html",
+			 "1 Uniform Circular Motion 4": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/1 Uniform Circular Motion 4.html",
+			 "1 Uniform Circular Motion 5": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/1 Uniform Circular Motion 5.html",
+			 "1 Uniform Circular Motion 6": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/1 Uniform Circular Motion 6.html",
+			 "2 Non-Uniform Circular Motion 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/2 Non-Uniform Circular Motion 1.html",
+			 "2 Non-Uniform Circular Motion 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/2 Non-Uniform Circular Motion 2.html",
+			 "3 Horizontal Projectile Motion ": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/3 Horizontal Projectile Motion .html",
+			 "4 Oblique Projectile Motion 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/4 Oblique Projectile Motion 1.html",
+			 "4 Oblique Projectile Motion 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/4 Oblique Projectile Motion 2.html",
+			 "4 Oblique Projectile Motion 3": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/4 Oblique Projectile Motion 3.html",
+			 "5 Graphical question ": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Motion-in-2D/5 Graphical question .html"	
+            },
+	 "Chapter 4 - NEWTON LAWS OF MOTION": {
+              "1 First Law of Motion": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/1 First Law of Motion.html",
+			  "2 Second Law of Motion 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/2 Second Law of Motion 1.html",
+              "2 Second Law of Motion 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/2 Second Law of Motion 2.html",
+              "2 Second Law of Motion 3": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/2 Second Law of Motion 3.html",
+              "2 Second Law of Motion 4": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/2 Second Law of Motion 4.html",
+              "2 Second Law of Motion 5": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/2 Second Law of Motion 5.html",
+              "3 Third Law of Motion": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/3 Third Law of Motion.html",
+              "4 Conservation of Linear Momentum and Impulse": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/4 Conservation of Linear Momentum and Impulse.html",
+              "5 Equilibrium of Forces": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/5 Equilibrium of Forces.html",
+              "6 Motion of Connected Bodies": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/6 Motion of Connected Bodies.html",
+			  "7 Graphical Questions": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF-NEWTON-LAW-OF-MOTION/7 Graphical Questions.html"
+				},
+            "Chapter 5 - FRICTION": {
+              "1 Static and Limiting Friction 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Friction/1 Static and Limiting Friction 1.html",
+			 "1 Static and Limiting Friction 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Friction/1 Static and Limiting Friction 2.html",
+			 "2 Kinetic Friction 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Friction/2 Kinetic Friction 1.html",
+			 "2 Kinetic Friction 2": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Friction/2 Kinetic Friction 2.html",
+			 "3 Motion on Inclined Surface": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--Friction/3 Motion on Inclined Surface.html"
+			    },
+	 
+			"Chapter 6 - KTG": {
+              "1. Gas Law 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--KTG/1. Gas Law 1.html",
+			 "2. Gas Law 1": "https://g10educationalplatform-physics.github.io/IIT-JEE-M-html-PDF--KTG/1. Gas Law 1.html"
+			  
+				},
+            "Chapter 4 - Coming Soon": {
+              "1. Coming Soon": "https://chemistry-g10ep.github.io/IIT-JEE--M--HTML-PDF-CHEMICAL-KINETICS/1. Chemical kinetics (Rate of a reaction)-1.html",
+			 "4. Coming Soon": "https://chemistry-g10ep.github.io/IIT-JEE--M--HTML-PDF-CHEMICAL-KINETICS/4. Chemical kinetics (Photochemical reactions).html"	
+            },
+			            "Chapter 5 - Coming Soon": {
+              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"	
+            },
+			            "Chapter 6 - Coming Soon": {
+              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"	
+            }
+          },
+	"Topic wise mcq (hard)": {
+   "Chapter 1 NEWTONS LAWS OF MOTION": {
+              "A-II": "https://g10educationalplatform-physics.github.io/ALLEN-HARD/MCQ-NLM coding.html",
+              "Coming Soon": "https://l-platform.github.io/Class-11-Physics/units-measurements/basic/significant-figures.html",
+			  "Coming Soon": "https://nal-platform.github.io/Class-11-Physics/units-measurements/basic/significant-figures.html"
+            },
+            "Chapter 2 - RAY OPTIC": {
+              "1 PRISM": "https://g10educationalplatform-physics.github.io/IIT-JEE-H--RAY-OP/RAY OPTIC PRISM.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"
+
+			   },
+			"Chapter 3 - Coming Soon": {
+              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+				},
+            "Chapter 4 - Coming Soon": {
+              "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html"	
+            }
+          },
+	"DPP Question And Solution": {
+            "All Chapter Include": {
+              "All Question, Answerkey and Solution Include ": "https://gten-educational-platform.github.io/Class-12/physics dpp solution.html"
+            }
+          },
+ "PYQ mains ": {
+            "UNIT MEASUREMENT AND DIMENSION": {
+              "PYQ-2024": "https://g10educationalplatform-physics.github.io/PYQ-Mains--UNIT-MEAS----DIMENSION/UNIT MEASUREMENT AND DIMENSION-2024.html"
+             },
+			"ELECTRIC CHARGES AND FIELDS": {
+              "PYQ-2024": "https://g10educationalplatform-physics.github.io/PYQ-Mains--ELEC-CHAR--FIELDS/ELECTRIC CHARGES AND FIELDS-2024.html",
+			  "PYQ-2025": "https://g10educationalplatform-physics.github.io/PYQ-Mains--ELEC-CHAR--FIELDS/PYQ-ELECTYRIC CHARGE AND ELECT FIELD-2025.html"
+				 },
+			"Alternating Current": {
+              "2025": "https://g10educationalplatform-physics.github.io/PYQ--Alt-Current/PYQ Alternating Current-2025.html",
+			  "2024": "https://g10educationalplatform-physics.github.io/PYQ--Alt-Current/PYQ Alternating Current-2024.html",
+			 },
+			"RAY OPTIC": {
+              "2023 TO 2025 (Mirror)": "https://g10educationalplatform-physics.github.io/PYQ-RAY-OPT/PYQ RAY OPTIC-2023 2025.html",
+			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 },
+			"Coming soon": {
+              "Coming soon": "https://cemistry-g10ep.github.io/PYQ-Solution/SOLUTION PYQ 2024.html",
+			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+			 },
+			"Coming soon": {
+              "PYQ-2024": "https://chemisry-g10ep.github.io/PYQ-Elec-Chemistry/ELECTROCHEMISTRY PYQ 2024.html",
+			  "Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/motion-1d/basic/uniform-acceleration.html",
+						
+			}
+          },
+
+"PYQ advance Coming Soon": {
+            "Chapter 1 - Coming Soon": {
+              "2023 Set A Coming Soon": "https://gten-educational-patform.github.io/Class-12/new 7.html",
+              "2022 Set B Coming Soon": "https://gten-educational-platform.github.io/Class-11-Physics/pyq-board/2022-set-b.html"
+    }
+  }
+};
 
 const levelSelect=document.getElementById('levelSelect');
 const chapterSelect=document.getElementById('chapterSelect');
